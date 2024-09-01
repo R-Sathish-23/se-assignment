@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RL.Data;
 
@@ -10,9 +11,10 @@ using RL.Data;
 namespace RL.Data.Migrations
 {
     [DbContext(typeof(RLContext))]
-    partial class RLContextModelSnapshot : ModelSnapshot
+    [Migration("20240901130054_InitialCreatetwo")]
+    partial class InitialCreatetwo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -57,15 +59,12 @@ namespace RL.Data.Migrations
 
             modelBuilder.Entity("RL.Data.DataModels.PlanUserData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PlanId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("PlanId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("ProcedureId")
                         .HasColumnType("INTEGER");
@@ -76,10 +75,7 @@ namespace RL.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
+                    b.HasKey("PlanId");
 
                     b.ToTable("PlanUserDatas");
                 });

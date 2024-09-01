@@ -5,6 +5,7 @@ import {
   getPlanProcedures,
   getProcedures,
   getUsers,
+  getUserProcedures
 } from "../../api/api";
 import Layout from '../Layout/Layout';
 import ProcedureItem from "./ProcedureItem/ProcedureItem";
@@ -15,10 +16,12 @@ const Plan = () => {
   const [procedures, setProcedures] = useState([]);
   const [planProcedures, setPlanProcedures] = useState([]);
   const [users, setUsers] = useState([]);
+  const [userprocedures, setuserprocedures] = useState([]);
 
   useEffect(() => {
     (async () => {
       var procedures = await getProcedures();
+      var userprocedures = await getUserProcedures();
       var planProcedures = await getPlanProcedures(id);
       var users = await getUsers();
 
@@ -28,6 +31,7 @@ const Plan = () => {
       setUsers(userOptions);
       setProcedures(procedures);
       setPlanProcedures(planProcedures);
+      setuserprocedures(userprocedures);
     })();
   }, [id]);
 
@@ -84,6 +88,8 @@ const Plan = () => {
                           key={p.procedure.procedureId}
                           procedure={p.procedure}
                           users={users}
+                          planId={id}
+                          userprocedures={userprocedures}
                         />
                       ))}
                     </div>

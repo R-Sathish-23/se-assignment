@@ -32,7 +32,33 @@ export const addProcedureToPlan = async (planId, procedureId) => {
 
     return true;
 };
+export const saveProcedureToUser = async (planId,usersId,userName,procedureId) => {
+    const url = `${api_url}/Plan/SaveProcedureToUser`;
+    var command = { planId:planId,userId :usersId,userName:userName,procedureId: procedureId };
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(command),
+    });
 
+    if (!response.ok) throw new Error("Failed to create plan");
+
+    return true;
+};
+
+export const getUserProcedures = async () => {
+    const url = `${api_url}/UserDatas`;
+    const response = await fetch(url, {
+        method: "GET",
+    });
+
+    if (!response.ok) throw new Error("Failed to get procedures");
+
+    return await response.json();
+};
 export const getProcedures = async () => {
     const url = `${api_url}/Procedures`;
     const response = await fetch(url, {

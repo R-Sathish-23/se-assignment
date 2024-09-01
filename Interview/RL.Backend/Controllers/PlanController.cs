@@ -30,6 +30,13 @@ public class PlanController : ControllerBase
     {
         return _context.Plans;
     }
+    [HttpGet]
+    [EnableQuery]
+    [Route("/UserDatas")]
+    public IEnumerable<PlanUserData> GetUserDatas()
+    {
+        return _context.PlanUserDatas;
+    }
 
     [HttpPost]
     public async Task<IActionResult> PostPlan(CreatePlanCommand command, CancellationToken token)
@@ -41,6 +48,14 @@ public class PlanController : ControllerBase
 
     [HttpPost("AddProcedureToPlan")]
     public async Task<IActionResult> AddProcedureToPlan(AddProcedureToPlanCommand command, CancellationToken token)
+    {
+        var response = await _mediator.Send(command, token);
+
+        return response.ToActionResult();
+    }
+
+    [HttpPost("SaveProcedureToUser")]
+    public async Task<IActionResult> SaveProcedureToUser(SaveProcedureToUserCommand command, CancellationToken token)
     {
         var response = await _mediator.Send(command, token);
 
